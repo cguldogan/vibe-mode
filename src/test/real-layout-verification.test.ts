@@ -5,7 +5,7 @@ suite('Real Layout State Verification Tests', () => {
 
 	suiteSetup(async () => {
 		// Ensure extension is activated
-		const extension = vscode.extensions.getExtension('undefined_publisher.agent-first-mode');
+		const extension = vscode.extensions.getExtension('undefined_publisher.vibe-mode');
 		if (extension && !extension.isActive) {
 			await extension.activate();
 		}
@@ -114,9 +114,9 @@ suite('Real Layout State Verification Tests', () => {
 		test('Should execute layout commands without throwing errors', async () => {
 			// Test individual commands for basic execution
 			const commands = [
-				'agent-first-mode.moveTerminalToLeft',
-				'agent-first-mode.hidePrimarySidebar',
-				'agent-first-mode.openCopilotInEditor'
+				'vibe-mode.moveTerminalToLeft',
+				'vibe-mode.hidePrimarySidebar',
+				'vibe-mode.openCopilotInEditor'
 			];
 
 			for (const command of commands) {
@@ -134,7 +134,7 @@ suite('Real Layout State Verification Tests', () => {
 
 		test('Should execute complete layout setup', async () => {
 			try {
-				await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+				await vscode.commands.executeCommand('vibe-mode.vibeOn');
 				assert.ok(true, 'Complete layout setup executed successfully');
 			} catch (error) {
 				console.log(`Layout setup handled error gracefully: ${error}`);
@@ -155,7 +155,7 @@ suite('Real Layout State Verification Tests', () => {
 
 			// Execute layout setup
 			try {
-				await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+				await vscode.commands.executeCommand('vibe-mode.vibeOn');
 			} catch (error) {
 				// Commands might fail in test environment - that's OK
 			}
@@ -240,9 +240,9 @@ suite('Real Layout State Verification Tests', () => {
 		test('Should recover gracefully from command failures', async () => {
 			// Test that failed commands don't break subsequent ones
 			const commands = [
-				'agent-first-mode.openCopilotInEditor',
-				'agent-first-mode.moveTerminalToLeft', 
-				'agent-first-mode.hidePrimarySidebar'
+				'vibe-mode.openCopilotInEditor',
+				'vibe-mode.moveTerminalToLeft', 
+				'vibe-mode.hidePrimarySidebar'
 			];
 
 			let successCount = 0;
@@ -270,7 +270,7 @@ suite('Real Layout State Verification Tests', () => {
 			
 			for (let i = 0; i < testIterations; i++) {
 				try {
-					await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+					await vscode.commands.executeCommand('vibe-mode.vibeOn');
 				} catch (error) {
 					// Expected - commands might fail in test environment
 				}

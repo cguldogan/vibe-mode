@@ -92,13 +92,13 @@ suite('Copilot Command Discovery and Fix Tests', () => {
 		console.log('=== Command testing completed ===');
 	});
 	
-	test('Should verify current openCopilotInEditor function behavior', async () => {
-		console.log('=== Testing Current Implementation ===');
+	test('Should verify current vibeOn function behavior', async () => {
+		console.log('=== Testing Current Vibe On Implementation ===');
 		
 		try {
-			// Test our current implementation
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
-			console.log('✓ Our openCopilotInEditor command executed without throwing');
+			// Test our current vibe on implementation
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
+			console.log('✓ Our vibeOn command executed without throwing');
 			
 			// Check if any new editors or tabs were opened
 			const tabGroups = vscode.window.tabGroups.all;

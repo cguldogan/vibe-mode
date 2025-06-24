@@ -9,14 +9,14 @@ suite('Basic Functionality Tests', () => {
 	});
 
 	test('Extension package.json validation', () => {
-		const extension = vscode.extensions.getExtension('undefined_publisher.agent-first-mode');
+		const extension = vscode.extensions.getExtension('undefined_publisher.vibe-mode');
 		if (extension) {
 			const packageJson = extension.packageJSON;
 			
 			assert.ok(packageJson.name, 'Package should have a name');
-			assert.strictEqual(packageJson.name, 'agent-first-mode', 'Package name should match');
+			assert.strictEqual(packageJson.name, 'vibe-mode', 'Package name should match');
 			assert.ok(packageJson.displayName, 'Package should have a display name');
-			assert.strictEqual(packageJson.displayName, 'Copilot Layout Manager', 'Display name should match');
+			assert.strictEqual(packageJson.displayName, 'Vibe Mode', 'Display name should match');
 			assert.ok(packageJson.description, 'Package should have a description');
 			assert.ok(packageJson.contributes, 'Package should have contributes section');
 			assert.ok(packageJson.contributes.commands, 'Package should contribute commands');
@@ -27,17 +27,15 @@ suite('Basic Functionality Tests', () => {
 		const allCommands = await vscode.commands.getCommands(true);
 		
 		// Filter to only our extension commands
-		const ourCommands = allCommands.filter(cmd => cmd.startsWith('agent-first-mode.'));
+		const ourCommands = allCommands.filter(cmd => cmd.startsWith('vibe-mode.'));
 		
-		// We should have exactly 4 commands
-		assert.ok(ourCommands.length >= 4, `Should have at least 4 commands, found: ${ourCommands.length}`);
+		// We should have exactly 2 commands
+		assert.ok(ourCommands.length >= 2, `Should have at least 2 commands, found: ${ourCommands.length}`);
 		
 		// Check each expected command exists
 		const expectedCommands = [
-			'agent-first-mode.setupLayout',
-			'agent-first-mode.openCopilotInEditor', 
-			'agent-first-mode.moveTerminalToLeft',
-			'agent-first-mode.hidePrimarySidebar'
+			'vibe-mode.vibeOn',
+			'vibe-mode.vibeOff'
 		];
 		
 		expectedCommands.forEach(expectedCmd => {

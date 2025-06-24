@@ -63,13 +63,13 @@ suite('Activity Bar Hide Verification', () => {
 		// Wait for state update
 		await new Promise(resolve => setTimeout(resolve, 100));
 		
-		// Now use our extension command
+		// Now use our extension command (vibe on includes hiding sidebar)
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.hidePrimarySidebar');
-			console.log('✓ Extension hide sidebar command executed');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
+			console.log('✓ Extension vibe on command executed');
 		} catch (error) {
 			console.log('Extension command failed:', (error as Error).message);
-			assert.fail('Extension hide sidebar command should work');
+			assert.fail('Extension vibe on command should work');
 		}
 		
 		// Wait for state update

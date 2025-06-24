@@ -62,7 +62,7 @@ suite('Welcome Tab Layout Conflict Bug Tests', () => {
 		console.log('=== Bug reproduction completed ===');
 	});
 	
-	test('Should fix the layout conflict with enhanced setupLayout', async () => {
+	test('Should fix the layout conflict with enhanced Vibe Mode', async () => {
 		console.log('=== Testing Bug Fix ===');
 		
 		// Step 1: Create the cluttered state again
@@ -82,12 +82,12 @@ suite('Welcome Tab Layout Conflict Bug Tests', () => {
 		const beforeFixTabCount = beforeFixTabGroups.reduce((count, group) => count + group.tabs.length, 0);
 		console.log(`Before fix - Tab count: ${beforeFixTabCount}`);
 		
-		// Step 2: Apply our enhanced setupLayout command that should fix the issue
+		// Step 2: Apply our enhanced vibeOn command that should fix the issue
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.setupLayout');
-			console.log('✓ Enhanced setup layout executed - should resolve conflicts');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
+			console.log('✓ Vibe Mode activated - should resolve conflicts');
 		} catch (error) {
-			console.log('Setup layout error:', (error as Error).message);
+			console.log('Vibe Mode activation error:', (error as Error).message);
 		}
 		
 		await new Promise(resolve => setTimeout(resolve, 400));
@@ -149,7 +149,7 @@ suite('Welcome Tab Layout Conflict Bug Tests', () => {
 		
 		// Now test our Welcome tab handling logic
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
+			await vscode.commands.executeCommand('vibe-mode.openCopilotInEditor');
 			console.log('✓ Copilot command with Welcome-like tab present');
 		} catch (error) {
 			console.log('Copilot with Welcome tab error:', (error as Error).message);
@@ -198,7 +198,7 @@ suite('Welcome Tab Layout Conflict Bug Tests', () => {
 		
 		// Apply the cleanLayout command specifically
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.cleanLayout');
+			await vscode.commands.executeCommand('vibe-mode.cleanLayout');
 			console.log('✓ Clean layout command executed');
 		} catch (error) {
 			console.log('Clean layout error:', (error as Error).message);

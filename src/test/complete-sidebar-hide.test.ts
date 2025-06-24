@@ -29,13 +29,13 @@ suite('Complete Sidebar Hide Verification', () => {
 		const initialActivityBarState = workbenchConfig.get('activityBar.location');
 		console.log('Initial activity bar location:', initialActivityBarState);
 		
-		// Now execute our extension's hide command
+		// Now execute our extension's vibe on command (which includes hiding sidebar)
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.hidePrimarySidebar');
-			console.log('✓ Extension hide sidebar command executed');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
+			console.log('✓ Extension vibe on command executed');
 		} catch (error) {
 			console.log('Extension command failed:', (error as Error).message);
-			assert.fail('Extension hide sidebar command should work');
+			assert.fail('Extension vibe on command should work');
 		}
 		
 		// Wait longer for state to update 
@@ -100,7 +100,7 @@ suite('Complete Sidebar Hide Verification', () => {
 		
 		// Execute our complete layout setup
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
 			console.log('✓ Complete layout setup executed');
 		} catch (error) {
 			console.log('Layout setup had issues (expected for Copilot):', (error as Error).message);

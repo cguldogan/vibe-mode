@@ -20,7 +20,7 @@ suite('Editor and Copilot Chat Conflict Tests', () => {
 		
 		// Now try to open Copilot chat - this is where the conflict occurs
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
+			await vscode.commands.executeCommand('vibe-mode.openCopilotInEditor');
 			console.log('✓ Copilot chat command executed');
 		} catch (error) {
 			console.log('Copilot command failed:', (error as Error).message);
@@ -60,7 +60,7 @@ suite('Editor and Copilot Chat Conflict Tests', () => {
 		
 		// Test our enhanced open Copilot function that should handle conflicts
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
+			await vscode.commands.executeCommand('vibe-mode.openCopilotInEditor');
 			console.log('✓ Enhanced Copilot command executed');
 		} catch (error) {
 			console.log('Enhanced Copilot command failed:', (error as Error).message);
@@ -91,7 +91,7 @@ suite('Editor and Copilot Chat Conflict Tests', () => {
 		
 		// Now open Copilot - this creates the conflict shown in the screenshot
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
+			await vscode.commands.executeCommand('vibe-mode.openCopilotInEditor');
 			console.log('✓ Copilot opened with Welcome tab present');
 		} catch (error) {
 			console.log('Copilot with Welcome tab failed:', (error as Error).message);
@@ -136,7 +136,7 @@ suite('Editor and Copilot Chat Conflict Tests', () => {
 		
 		// Now run our clean layout command
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.cleanLayout');
+			await vscode.commands.executeCommand('vibe-mode.cleanLayout');
 			console.log('✓ Clean layout command executed');
 		} catch (error) {
 			console.log('Clean layout command failed:', (error as Error).message);
@@ -171,7 +171,7 @@ suite('Editor and Copilot Chat Conflict Tests', () => {
 		
 		// Now run our enhanced setup layout command
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
 			console.log('✓ Enhanced setup layout executed');
 		} catch (error) {
 			console.log('Enhanced setup layout failed:', (error as Error).message);

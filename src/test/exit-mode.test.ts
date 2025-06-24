@@ -5,14 +5,14 @@ import * as sinon from 'sinon';
 // Import the extension module
 import * as extension from '../extension';
 
-suite('Exit Mode (Restore Default Layout) Tests', () => {
+suite('Vibe Off (Restore Default Layout) Tests', () => {
 	let executeCommandStub: sinon.SinonStub;
 	let showInformationMessageStub: sinon.SinonStub;
 	let showErrorMessageStub: sinon.SinonStub;
 
 	// Setup before all tests
 	suiteSetup(async () => {
-		vscode.window.showInformationMessage('Starting Exit Mode tests...');
+		vscode.window.showInformationMessage('Starting Vibe Off tests...');
 		
 		// Activate the extension before running tests
 		const mockContext = {
@@ -58,7 +58,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 	suite('Basic Exit Mode Command Tests', () => {
 		test('Should be registered as a command', async () => {
 			const commands = await vscode.commands.getCommands();
-			assert.ok(commands.includes('agent-first-mode.exitMode'), 'Exit mode command should be registered');
+			assert.ok(commands.includes('vibe-mode.vibeOff'), 'Vibe Off command should be registered');
 		});
 
 		test('Should execute all restore commands in sequence', async () => {
@@ -73,7 +73,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.focusActiveEditorGroup').resolves();
 			executeCommandStub.withArgs('workbench.action.closeActiveEditor').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Verify all expected commands are called
 			assert.ok(executeCommandStub.calledWith('workbench.action.activityBarLocation.default'), 
@@ -97,9 +97,9 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.focusActiveEditorGroup').resolves();
 			executeCommandStub.withArgs('workbench.action.closeActiveEditor').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
-			assert.ok(showInformationMessageStub.calledWith('Default VS Code layout restored!'), 
+			assert.ok(showInformationMessageStub.calledWith('🎯 Vibe Mode OFF - Back to normal! 👍'), 
 				'Should show success message');
 		});
 
@@ -113,10 +113,10 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.toggleStatusbarVisibility').resolves();
 			executeCommandStub.withArgs('workbench.action.focusActiveEditorGroup').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Individual command failures should not prevent showing success
-			assert.ok(showInformationMessageStub.calledWith('Default VS Code layout restored!'), 
+			assert.ok(showInformationMessageStub.calledWith('🎯 Vibe Mode OFF - Back to normal! 👍'), 
 				'Should show success even if individual commands fail');
 		});
 	});
@@ -126,7 +126,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.callThrough();
 			executeCommandStub.withArgs('workbench.action.activityBarLocation.default').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			assert.ok(executeCommandStub.calledWith('workbench.action.activityBarLocation.default'), 
 				'Should call activity bar default command');
@@ -137,7 +137,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.activityBarLocation.default').resolves();
 			executeCommandStub.withArgs('workbench.action.toggleActivityBarVisibility').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Check for commands that would show the activity bar
 			const showCommands = [
@@ -158,7 +158,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.callThrough();
 			executeCommandStub.withArgs('workbench.action.positionPanelBottom').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			assert.ok(executeCommandStub.calledWith('workbench.action.positionPanelBottom'), 
 				'Should move panel to bottom');
@@ -169,7 +169,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.positionPanelBottom').resolves();
 			executeCommandStub.withArgs('workbench.action.togglePanel').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should try to show the panel
 			assert.ok(executeCommandStub.calledWith('workbench.action.togglePanel') || 
@@ -183,7 +183,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.callThrough();
 			executeCommandStub.withArgs('workbench.action.chat.open').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should open chat in normal mode, not editor mode
 			assert.ok(executeCommandStub.calledWith('workbench.action.chat.open'), 
@@ -196,7 +196,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.closeAllEditors').resolves();
 			executeCommandStub.withArgs('workbench.action.chat.open').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should close chat editors before opening normal chat
 			const closeChatEditorCommands = [
@@ -219,7 +219,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.callThrough();
 			executeCommandStub.withArgs('workbench.action.files.newUntitledFile').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			assert.ok(executeCommandStub.calledWith('workbench.action.files.newUntitledFile'), 
 				'Should create new untitled file in editor');
@@ -230,7 +230,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.focusActiveEditorGroup').resolves();
 			executeCommandStub.withArgs('workbench.action.files.newUntitledFile').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should focus editor after creating new file
 			assert.ok(executeCommandStub.calledWith('workbench.action.focusActiveEditorGroup') ||
@@ -244,7 +244,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.callThrough();
 			executeCommandStub.withArgs('workbench.action.toggleStatusbarVisibility').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should check status bar visibility and show if needed
 			assert.ok(executeCommandStub.calledWith('workbench.action.toggleStatusbarVisibility'), 
@@ -263,7 +263,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.toggleStatusbarVisibility').resolves();
 			executeCommandStub.withArgs('workbench.action.focusActiveEditorGroup').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Get all the calls in order
 			const calls = executeCommandStub.getCalls().map(call => call.args[0]);
@@ -292,7 +292,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.chat.open').resolves();
 			executeCommandStub.withArgs('workbench.action.files.newUntitledFile').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should still call other commands even if one fails
 			assert.ok(executeCommandStub.calledWith('workbench.action.positionPanelBottom'), 
@@ -307,12 +307,12 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			// Create a scenario where the main function itself fails, not just individual commands
 			executeCommandStub.callThrough();
 			// Force a major error by rejecting the extension command itself with callsFake
-			executeCommandStub.withArgs('agent-first-mode.exitMode').callsFake(() => {
+			executeCommandStub.withArgs('vibe-mode.vibeOff').callsFake(() => {
 				throw new Error('Major system error');
 			});
 
 			try {
-				await vscode.commands.executeCommand('agent-first-mode.exitMode');
+				await vscode.commands.executeCommand('vibe-mode.vibeOff');
 			} catch (error) {
 				// This is expected due to our forced error
 			}
@@ -332,11 +332,11 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.chat.open').resolves();
 
 			// First setup copilot layout
-			await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
 			executeCommandStub.resetHistory();
 
 			// Then exit mode
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should call commands that reverse the setup
 			assert.ok(executeCommandStub.calledWith('workbench.action.activityBarLocation.default'), 
@@ -354,7 +354,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.activityBarLocation.default').rejects(new Error('Not available'));
 			executeCommandStub.withArgs('workbench.action.toggleActivityBarVisibility').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should try the fallback command
 			assert.ok(executeCommandStub.calledWith('workbench.action.toggleActivityBarVisibility'), 
@@ -366,7 +366,7 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.chat.open').rejects(new Error('Not available'));
 			executeCommandStub.withArgs('workbench.action.chat.openInSidebar').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should try fallback chat command
 			assert.ok(executeCommandStub.calledWith('workbench.action.chat.openInSidebar'), 
@@ -382,10 +382,10 @@ suite('Exit Mode (Restore Default Layout) Tests', () => {
 			executeCommandStub.withArgs('workbench.action.chat.open').resolves();
 			executeCommandStub.withArgs('workbench.action.files.newUntitledFile').resolves();
 
-			await vscode.commands.executeCommand('agent-first-mode.exitMode');
+			await vscode.commands.executeCommand('vibe-mode.vibeOff');
 
 			// Should not throw errors even if layout is already default
-			assert.ok(showInformationMessageStub.calledWith('Default VS Code layout restored!'), 
+			assert.ok(showInformationMessageStub.calledWith('🎯 Vibe Mode OFF - Back to normal! 👍'), 
 				'Should show success even if already in default layout');
 		});
 	});

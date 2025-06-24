@@ -37,7 +37,7 @@ suite('Layout Position Verification Tests', () => {
 			getConfigurationStub.withArgs('workbench').returns(mockWorkbenchConfig);
 
 			// Mock command execution to simulate our extension commands
-			executeCommandStub.withArgs('agent-first-mode.moveTerminalToLeft').callsFake(async () => {
+			executeCommandStub.withArgs('vibe-mode.moveTerminalToLeft').callsFake(async () => {
 				// Simulate the actual extension function calls
 				await executeCommandStub.withArgs('workbench.action.terminal.toggleTerminal').resolves();
 				await executeCommandStub.withArgs('workbench.action.positionPanelLeft').resolves();
@@ -47,10 +47,10 @@ suite('Layout Position Verification Tests', () => {
 			executeCommandStub.withArgs('workbench.action.positionPanelLeft').resolves();
 
 			// Execute our extension command (this will be mocked)
-			await executeCommandStub('agent-first-mode.moveTerminalToLeft');
+			await executeCommandStub('vibe-mode.moveTerminalToLeft');
 
 			// Verify the underlying VS Code commands would be called
-			assert.ok(executeCommandStub.calledWith('agent-first-mode.moveTerminalToLeft'), 
+			assert.ok(executeCommandStub.calledWith('vibe-mode.moveTerminalToLeft'), 
 				'Should call move terminal command');
 		});
 

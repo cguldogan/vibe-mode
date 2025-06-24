@@ -39,11 +39,10 @@ suite('Practical Sidebar Hide Tests', () => {
 	test('Should verify extension commands execute in production-like environment', async () => {
 		console.log('=== Production-like Extension Test ===');
 		
-		// Test each of our extension commands individually
+		// Test each of our main extension commands
 		const extensionCommands = [
-			'agent-first-mode.openCopilotInEditor',
-			'agent-first-mode.moveTerminalToLeft', 
-			'agent-first-mode.hidePrimarySidebar'
+			'vibe-mode.vibeOn',
+			'vibe-mode.vibeOff'
 		];
 		
 		let results: { [key: string]: boolean } = {};
@@ -65,13 +64,13 @@ suite('Practical Sidebar Hide Tests', () => {
 		
 		console.log('Command results:', results);
 		
-		// At minimum, the sidebar hide command should work
-		assert.ok(results['agent-first-mode.hidePrimarySidebar'], 
-			'Hide primary sidebar command should execute successfully');
+		// At minimum, the vibe on command should work
+		assert.ok(results['vibe-mode.vibeOn'], 
+			'Vibe on command should execute successfully');
 		
-		// Terminal command should also work
-		assert.ok(results['agent-first-mode.moveTerminalToLeft'], 
-			'Move terminal to left command should execute successfully');
+		// Vibe off command should also work
+		assert.ok(results['vibe-mode.vibeOff'], 
+			'Vibe off command should execute successfully');
 		
 		console.log('=== Extension commands verified ===');
 	});

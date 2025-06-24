@@ -5,14 +5,14 @@ import * as sinon from 'sinon';
 // Import the extension module
 import * as extension from '../extension';
 
-suite('Copilot Layout Manager Unit Tests', () => {
+suite('Vibe Mode Unit Tests', () => {
 	let executeCommandStub: sinon.SinonStub;
 	let showInformationMessageStub: sinon.SinonStub;
 	let showErrorMessageStub: sinon.SinonStub;
 
 	// Setup before all tests
 	suiteSetup(async () => {
-		vscode.window.showInformationMessage('Starting Copilot Layout Manager unit tests...');
+		vscode.window.showInformationMessage('Starting Vibe Mode unit tests...');
 	});
 
 	// Setup before each test

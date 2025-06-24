@@ -5,7 +5,7 @@ suite('Visual Layout State Tests', () => {
 
 	suiteSetup(async () => {
 		// Ensure extension is activated
-		const extension = vscode.extensions.getExtension('undefined_publisher.agent-first-mode');
+		const extension = vscode.extensions.getExtension('undefined_publisher.vibe-mode');
 		if (extension && !extension.isActive) {
 			await extension.activate();
 		}
@@ -41,10 +41,10 @@ suite('Visual Layout State Tests', () => {
 			}
 		});
 
-		test('Should execute our extension hide sidebar command', async () => {
+		test('Should execute our extension vibe on command', async () => {
 			try {
-				await vscode.commands.executeCommand('agent-first-mode.hidePrimarySidebar');
-				assert.ok(true, 'Extension hide sidebar command executed successfully');
+				await vscode.commands.executeCommand('vibe-mode.vibeOn');
+				assert.ok(true, 'Extension vibe on command executed successfully');
 			} catch (error) {
 				console.error('Extension command failed:', error);
 				assert.fail(`Extension command failed: ${error}`);
@@ -123,7 +123,7 @@ suite('Visual Layout State Tests', () => {
 
 		test('Should execute our extension setup layout command', async () => {
 			try {
-				await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+				await vscode.commands.executeCommand('vibe-mode.vibeOn');
 				assert.ok(true, 'Extension setup layout command executed successfully');
 			} catch (error) {
 				console.error('Extension setup layout failed:', error);

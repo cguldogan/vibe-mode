@@ -1,71 +1,77 @@
-# Copilot Layout Manager
+# Vibe Mode
 
-A VS Code extension that provides an optimal layout for working with GitHub Copilot by managing the editor layout, terminal position, and sidebar visibility with enhanced conflict resolution.
+A VS Code extension that helps you enter your optimal coding flow state by intelligently managing your workspace layout for maximum focus and productivity.
 
 ## Features
 
-This extension provides the following commands to optimize your VS Code layout for Copilot usage:
+This extension provides commands to optimize your VS Code layout for deep focus work:
 
 ### Primary Commands
 
-- **Setup Layout** (`agent-first-mode.setupLayout`) - Executes all layout optimizations with conflict resolution
-- **Exit Copilot Mode** (`agent-first-mode.exitMode`) - Restores default VS Code layout (exits Copilot mode)
-- **Open Copilot in Editor** (`agent-first-mode.openCopilotInEditor`) - Opens Copilot chat with enhanced conflict detection
-- **Move Terminal to Left** (`agent-first-mode.moveTerminalToLeft`) - Positions the terminal panel on the left side
-- **Hide Primary Sidebar** (`agent-first-mode.hidePrimarySidebar`) - Hides the activity bar and sidebar for more space
+- **Vibe On** (`vibe-mode.vibeOn`) - Enter your flow state with optimal layout configuration
+- **Vibe Off** (`vibe-mode.vibeOff`) - Exit flow state and restore default VS Code layout
 
-### Utility Commands
+## What Vibe Mode Does
 
-- **Clean Layout** (`agent-first-mode.cleanLayout`) - Aggressively cleans layout by closing conflicting editors and panels
+### Vibe On - Enter Flow State
+- Automatically cleans conflicting UI elements
+- Opens Copilot chat in editor for AI assistance  
+- Moves terminal to left for better workflow
+- Hides sidebar and activity bar for maximum focus
+- Smart conflict detection and resolution
+
+### Vibe Off - Exit Flow State
+- Restores activity bar to default position (visible, left)
+- Moves panel/terminal back to bottom position
+- Shows sidebar and normal UI elements
+- Opens chat in normal sidebar/panel mode
+- Creates new empty editor in center
+- Ensures status bar is visible
 
 ## Enhanced Layout Conflict Resolution
 
-This extension now includes enhanced logic to resolve layout conflicts that can occur when multiple editors, Welcome tabs, or other UI elements compete for space with Copilot chat.
+This extension includes enhanced logic to resolve layout conflicts that can occur when multiple editors, Welcome tabs, or other UI elements compete for space with your focused workflow.
 
 ### Automatic Conflict Detection
-- Detects Welcome tabs that conflict with Copilot layout
+- Detects Welcome tabs that conflict with optimal layout
 - Identifies multiple open editors that create clutter
-- Recognizes when sidebar and panels interfere with optimal layout
+- Recognizes when sidebar and panels interfere with focus
 
 ### Aggressive Cleanup Strategy
-- Closes all conflicting editors before opening Copilot
+- Closes all conflicting editors before entering Vibe Mode
 - Hides sidebar, activity bar, and unnecessary panels
-- Provides a clean slate for optimal Copilot interaction
+- Provides a clean slate for optimal focus and flow
 - Includes comprehensive logging for troubleshooting
 
 ### Usage
 
-### Quick Setup
-Run the **"Copilot Layout Manager: Setup Layout"** command from the Command Palette to execute all layout optimizations with automatic conflict resolution.
+### Quick Setup - Enter Vibe Mode
+Run the **"Vibe Mode: Vibe On - Enter Flow State"** command from the Command Palette to enter your optimal coding flow state with automatic conflict resolution.
 
-### Exit Copilot Mode  
-Run the **"Copilot Layout Manager: Exit Copilot Mode"** command to restore the default VS Code layout when you're done with focused Copilot work.
+### Exit Vibe Mode  
+Run the **"Vibe Mode: Vibe Off - Exit Flow State"** command to restore the default VS Code layout when you're done with focused work.
 
-### Individual Commands
-- **"Copilot Layout Manager: Setup Layout"** - Complete Copilot layout optimization
-- **"Copilot Layout Manager: Exit Copilot Mode"** - Restore default VS Code layout
-- **"Copilot Layout Manager: Open Copilot in Editor"** - Opens Copilot chat in editor mode with conflict resolution
-- **"Copilot Layout Manager: Move Terminal to Left"** - Repositions terminal panel to the left side
-- **"Copilot Layout Manager: Hide Primary Sidebar"** - Hides activity bar and sidebar
-- **"Copilot Layout Manager: Clean Layout"** - Performs aggressive cleanup of conflicting UI elements
+### Commands
+- **"Vibe Mode: Vibe On - Enter Flow State"** - Complete flow state optimization  
+- **"Vibe Mode: Vibe Off - Exit Flow State"** - Restore default VS Code layout
 
 ## Technical Details
 
-### Layout Optimization Strategy
+### Flow State Optimization Strategy
 1. **Clean Slate Approach**: Closes all conflicting editors and tabs
 2. **UI Minimization**: Hides non-essential UI elements (sidebar, activity bar, panels)
 3. **Terminal Optimization**: Positions terminal on the left for better workflow
-4. **Copilot Integration**: Opens Copilot chat in the optimal editor position
+4. **Focus Integration**: Opens tools (like Copilot) in the optimal editor position
 
 ### Conflict Resolution
 The extension detects and resolves common layout conflicts:
 - Multiple open editors competing for space
-- Welcome tab interfering with Copilot chat
+- Welcome tab interfering with focused workflow
 - Sidebar and activity bar reducing available space
 - Bottom panels creating visual clutter
 
 ### Commands Used
-- `vscode.editorChat.start` - Opens Copilot in editor mode
+- `workbench.action.chat.openInEditor` - Opens Copilot in editor mode
 - `workbench.action.positionPanelLeft` - Moves terminal to left
 - `workbench.action.closeSidebar` - Hides the sidebar
 - `workbench.action.activityBarLocation.hide` - Hides the activity bar
@@ -74,7 +80,7 @@ The extension detects and resolves common layout conflicts:
 ## Requirements
 
 - VS Code version 1.74.0 or higher
-- GitHub Copilot extension (recommended for full functionality)
+- GitHub Copilot extension (recommended for AI-assisted coding workflows)
 
 ## Installation
 
@@ -87,36 +93,34 @@ The extension detects and resolves common layout conflicts:
 
 This extension contributes the following commands:
 
-- `agent-first-mode.setupLayout`: Setup Layout (with conflict resolution)
-- `agent-first-mode.openCopilotInEditor`: Open Copilot in Editor (enhanced)
-- `agent-first-mode.moveTerminalToLeft`: Move Terminal Panel to Left  
-- `agent-first-mode.hidePrimarySidebar`: Hide Primary Sidebar
-- `agent-first-mode.cleanLayout`: Clean Layout (aggressive cleanup)
+- `vibe-mode.vibeOn`: Vibe On - Enter Flow State (with conflict resolution)
+- `vibe-mode.vibeOff`: Vibe Off - Exit Flow State (restore default layout)
 
 ## Known Issues and Limitations
 
-- Requires GitHub Copilot extension to be installed for full functionality
+- Requires GitHub Copilot extension to be installed for AI-assisted workflows
 - Some VS Code commands may not be available in all environments
-- Layout changes are immediate and may require manual restoration if undesired
+- Layout changes are immediate and can be reversed using Vibe Off command
 
 ## Release Notes
 
 ### 0.0.1
 - Initial release with basic layout management
-- Commands for Copilot, terminal, and sidebar management
+- Commands for focused workflow, terminal, and sidebar management
 - Comprehensive test suite
 
-### 0.0.2 (Current)
-- **Enhanced layout conflict resolution** - Fixes the Welcome tab + Copilot layout conflict
-- **Aggressive cleanup strategy** for optimal Copilot experience
+### 0.1.0 (Current - Vibe Mode)
+- **🎯 Rebranded to "Vibe Mode"** - Enter your optimal coding flow state
+- **Enhanced conflict resolution** - Intelligent layout optimization
+- **Vibe On/Off workflow** - Seamless entry and exit from flow state
 - **Improved Welcome tab handling** and multi-editor conflict resolution
-- **Added Clean Layout command** for proactive layout management
+- **Clean Layout command** for aggressive workspace optimization  
 - **Enhanced logging and debugging** capabilities
-- **80+ comprehensive tests** including layout conflict scenarios
+- **108+ comprehensive tests** including layout conflict scenarios
 
 ## Testing
 
-The extension includes comprehensive test coverage with 80+ tests covering:
+The extension includes comprehensive test coverage with 108+ tests covering:
 
 - **Unit Tests**: Individual function testing
 - **Integration Tests**: Command registration and execution
@@ -124,6 +128,7 @@ The extension includes comprehensive test coverage with 80+ tests covering:
 - **Conflict Resolution Tests**: Welcome tab and multi-editor scenarios
 - **Visual Layout Tests**: UI component positioning
 - **Error Handling Tests**: Graceful failure scenarios
+- **Vibe Mode Tests**: Flow state entry and exit
 
 Run tests with:
 ```bash
@@ -132,7 +137,7 @@ npm test
 
 ---
 
-**Enjoy optimizing your VS Code layout for Copilot!**
+**Enjoy your optimal coding Vibe Mode! 🎯🚀**
 
 ---
 

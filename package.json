@@ -1,7 +1,7 @@
 {
-  "name": "agent-first-mode",
-  "displayName": "Copilot Layout Manager",
-  "description": "VS Code extension to manage Copilot and panel layouts",
+  "name": "vibe-mode",
+  "displayName": "Vibe Mode",
+  "description": "VS Code extension to enter your optimal coding flow state with smart layout management",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.101.0"
@@ -14,34 +14,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "agent-first-mode.setupLayout",
-        "title": "Setup Copilot Layout",
-        "category": "Copilot Layout Manager"
+        "command": "vibe-mode.vibeOn",
+        "title": "Vibe On - Enter Flow State",
+        "category": "Vibe Mode"
       },
       {
-        "command": "agent-first-mode.openCopilotInEditor",
-        "title": "Open Copilot in Editor",
-        "category": "Copilot Layout Manager"
-      },
-      {
-        "command": "agent-first-mode.moveTerminalToLeft",
-        "title": "Move Terminal Panel to Left",
-        "category": "Copilot Layout Manager"
-      },
-      {
-        "command": "agent-first-mode.hidePrimarySidebar",
-        "title": "Hide Primary Sidebar",
-        "category": "Copilot Layout Manager"
-      },
-      {
-        "command": "agent-first-mode.cleanLayout",
-        "title": "Clean Layout for Copilot",
-        "category": "Copilot Layout Manager"
-      },
-      {
-        "command": "agent-first-mode.exitMode",
-        "title": "Exit Copilot Mode (Restore Default Layout)",
-        "category": "Copilot Layout Manager"
+        "command": "vibe-mode.vibeOff",
+        "title": "Vibe Off - Exit Flow State",
+        "category": "Vibe Mode"
       }
     ]
   },

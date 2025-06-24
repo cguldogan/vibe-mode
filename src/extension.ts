@@ -5,82 +5,38 @@ import * as vscode from 'vscode';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Copilot Layout Manager extension is now active!');
+	console.log('Vibe Mode extension is now active!');
 
-	// Command to setup the complete layout (all three actions)
-	const setupLayoutCommand = vscode.commands.registerCommand('agent-first-mode.setupLayout', async () => {
+	// Command to vibe on (enter flow state)
+	const vibeOnCommand = vscode.commands.registerCommand('vibe-mode.vibeOn', async () => {
 		try {
 			// First clean the layout to avoid conflicts
-			await cleanLayoutForCopilot();
+			await cleanLayoutForVibeMode();
 			
 			// Then execute all three actions in sequence
 			await openCopilotInEditor();
 			await moveTerminalToLeft();
 			await hidePrimarySidebar();
 			
-			vscode.window.showInformationMessage('Copilot layout setup complete!');
+			vscode.window.showInformationMessage('🎯 Vibe Mode ON - You\'re in the flow! 🚀');
 		} catch (error) {
-			vscode.window.showErrorMessage(`Error setting up layout: ${error}`);
+			vscode.window.showErrorMessage(`Error entering Vibe Mode: ${error}`);
 		}
 	});
 
-	// Command to open Copilot in editor mode
-	const openCopilotCommand = vscode.commands.registerCommand('agent-first-mode.openCopilotInEditor', async () => {
-		try {
-			await openCopilotInEditor();
-			vscode.window.showInformationMessage('Copilot opened in editor mode');
-		} catch (error) {
-			vscode.window.showErrorMessage(`Error opening Copilot: ${error}`);
-		}
-	});
-
-	// Command to move terminal panel to left
-	const moveTerminalCommand = vscode.commands.registerCommand('agent-first-mode.moveTerminalToLeft', async () => {
-		try {
-			await moveTerminalToLeft();
-			vscode.window.showInformationMessage('Terminal panel moved to left');
-		} catch (error) {
-			vscode.window.showErrorMessage(`Error moving terminal: ${error}`);
-		}
-	});
-
-	// Command to hide primary sidebar
-	const hideSidebarCommand = vscode.commands.registerCommand('agent-first-mode.hidePrimarySidebar', async () => {
-		try {
-			await hidePrimarySidebar();
-			vscode.window.showInformationMessage('Primary sidebar hidden');
-		} catch (error) {
-			vscode.window.showErrorMessage(`Error hiding sidebar: ${error}`);
-		}
-	});
-
-	// Command to clean layout for optimal Copilot experience
-	const cleanLayoutCommand = vscode.commands.registerCommand('agent-first-mode.cleanLayout', async () => {
-		try {
-			await cleanLayoutForCopilot();
-			vscode.window.showInformationMessage('Layout cleaned for optimal Copilot experience');
-		} catch (error) {
-			vscode.window.showErrorMessage(`Error cleaning layout: ${error}`);
-		}
-	});
-
-	// Command to exit Copilot mode and restore default VS Code layout
-	const exitModeCommand = vscode.commands.registerCommand('agent-first-mode.exitMode', async () => {
+	// Command to vibe off (exit flow state and restore default VS Code layout)
+	const vibeOffCommand = vscode.commands.registerCommand('vibe-mode.vibeOff', async () => {
 		try {
 			await restoreDefaultLayout();
-			vscode.window.showInformationMessage('Default VS Code layout restored!');
+			vscode.window.showInformationMessage('🎯 Vibe Mode OFF - Back to normal! 👍');
 		} catch (error) {
-			vscode.window.showErrorMessage(`Error restoring default layout: ${error}`);
+			vscode.window.showErrorMessage(`Error exiting Vibe Mode: ${error}`);
 		}
 	});
 
-	// Register all commands
-	context.subscriptions.push(setupLayoutCommand);
-	context.subscriptions.push(openCopilotCommand);
-	context.subscriptions.push(moveTerminalCommand);
-	context.subscriptions.push(hideSidebarCommand);
-	context.subscriptions.push(cleanLayoutCommand);
-	context.subscriptions.push(exitModeCommand);
+	// Register the two main commands
+	context.subscriptions.push(vibeOnCommand);
+	context.subscriptions.push(vibeOffCommand);
 }
 
 // Function to open Copilot in editor mode
@@ -219,10 +175,10 @@ async function hidePrimarySidebar(): Promise<void> {
 	}
 }
 
-// Function to clean layout for optimal Copilot experience
-async function cleanLayoutForCopilot(): Promise<void> {
+// Function to clean layout for optimal Vibe Mode experience
+async function cleanLayoutForVibeMode(): Promise<void> {
 	try {
-		console.log('Cleaning layout for optimal Copilot experience...');
+		console.log('Cleaning layout for optimal Vibe Mode experience...');
 		
 		// Step 1: Get current state for logging
 		const initialTabGroups = vscode.window.tabGroups.all;
@@ -311,18 +267,18 @@ async function cleanLayoutForCopilot(): Promise<void> {
 		const finalEditorCount = vscode.window.visibleTextEditors.length;
 		
 		console.log(`Final state - Tabs: ${finalTabCount}, Editors: ${finalEditorCount}`);
-		console.log('Layout cleanup completed - ready for optimal Copilot experience');
+		console.log('Layout cleanup completed - ready for optimal Vibe Mode experience');
 		
 	} catch (error) {
 		console.log('Error during layout cleanup:', error);
-		throw new Error('Unable to clean layout for Copilot');
+		throw new Error('Unable to clean layout for Vibe Mode');
 	}
 }
 
-// Function to restore default VS Code layout (exit Copilot mode)
+// Function to restore default VS Code layout (exit Vibe Mode)
 async function restoreDefaultLayout(): Promise<void> {
 	try {
-		console.log('Restoring default VS Code layout...');
+		console.log('Exiting Vibe Mode - restoring default VS Code layout...');
 		
 		// Step 1: Close any chat editors that might be open
 		try {
@@ -419,11 +375,11 @@ async function restoreDefaultLayout(): Promise<void> {
 		// Final delay to let all changes settle
 		await new Promise(resolve => setTimeout(resolve, 200));
 		
-		console.log('Default VS Code layout restoration completed');
+		console.log('Vibe Mode exit completed - default VS Code layout restored');
 		
 	} catch (error) {
-		console.log('Error during layout restoration:', error);
-		throw new Error('Unable to restore default layout');
+		console.log('Error during Vibe Mode exit:', error);
+		throw new Error('Unable to exit Vibe Mode and restore default layout');
 	}
 }
 

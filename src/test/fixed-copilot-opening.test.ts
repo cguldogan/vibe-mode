@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 
 suite('Fixed Copilot Opening Tests', () => {
 	
-	test('Should test the fixed openCopilotInEditor implementation', async () => {
+	test('Should test the fixed vibeOn implementation', async () => {
 		console.log('=== Testing Fixed Copilot Implementation ===');
 		
 		// Clean up any existing tabs first
@@ -19,10 +19,10 @@ suite('Fixed Copilot Opening Tests', () => {
 		const initialTabCount = initialTabGroups.reduce((count, group) => count + group.tabs.length, 0);
 		console.log(`Initial tab count: ${initialTabCount}`);
 		
-		// Test our fixed implementation
+		// Test our fixed implementation (vibe on includes Copilot opening)
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.openCopilotInEditor');
-			console.log('✓ Fixed openCopilotInEditor command executed successfully');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
+			console.log('✓ Fixed vibeOn command executed successfully');
 		} catch (error) {
 			console.log(`✗ Fixed command failed: ${(error as Error).message}`);
 		}
@@ -119,7 +119,7 @@ suite('Fixed Copilot Opening Tests', () => {
 		
 		// Test complete setup layout
 		try {
-			await vscode.commands.executeCommand('agent-first-mode.setupLayout');
+			await vscode.commands.executeCommand('vibe-mode.vibeOn');
 			console.log('✓ Complete setup layout executed');
 		} catch (error) {
 			console.log(`Setup layout error: ${(error as Error).message}`);
