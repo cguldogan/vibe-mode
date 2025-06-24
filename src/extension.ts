@@ -64,12 +64,23 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
+	// Command to exit Copilot mode and restore default VS Code layout
+	const exitModeCommand = vscode.commands.registerCommand('agent-first-mode.exitMode', async () => {
+		try {
+			await restoreDefaultLayout();
+			vscode.window.showInformationMessage('Default VS Code layout restored!');
+		} catch (error) {
+			vscode.window.showErrorMessage(`Error restoring default layout: ${error}`);
+		}
+	});
+
 	// Register all commands
 	context.subscriptions.push(setupLayoutCommand);
 	context.subscriptions.push(openCopilotCommand);
 	context.subscriptions.push(moveTerminalCommand);
 	context.subscriptions.push(hideSidebarCommand);
 	context.subscriptions.push(cleanLayoutCommand);
+	context.subscriptions.push(exitModeCommand);
 }
 
 // Function to open Copilot in editor mode
@@ -305,6 +316,114 @@ async function cleanLayoutForCopilot(): Promise<void> {
 	} catch (error) {
 		console.log('Error during layout cleanup:', error);
 		throw new Error('Unable to clean layout for Copilot');
+	}
+}
+
+// Function to restore default VS Code layout (exit Copilot mode)
+async function restoreDefaultLayout(): Promise<void> {
+	try {
+		console.log('Restoring default VS Code layout...');
+		
+		// Step 1: Close any chat editors that might be open
+		try {
+			const tabGroups = vscode.window.tabGroups.all;
+			const hasChatEditor = tabGroups.some(group => 
+				group.tabs.some(tab => tab.label.includes('Copilot') || tab.label.includes('Chat'))
+			);
+			
+			if (hasChatEditor) {
+				console.log('Closing chat editors...');
+				await vscode.commands.executeCommand('workbench.action.closeActiveEditor');
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+		} catch (error) {
+			console.log('Could not close chat editors:', error);
+		}
+		
+		// Step 2: Restore activity bar to default position (visible, left side)
+		try {
+			await vscode.commands.executeCommand('workbench.action.activityBarLocation.default');
+			console.log('✓ Activity bar restored to default position');
+		} catch (error) {
+			console.log('Primary activity bar command failed, trying fallback:', error);
+			try {
+				// Fallback: ensure activity bar is visible
+				await vscode.commands.executeCommand('workbench.action.toggleActivityBarVisibility');
+			} catch (fallbackError) {
+				console.log('Activity bar fallback failed:', fallbackError);
+			}
+		}
+		
+		// Step 3: Move panel (terminal) to bottom position
+		try {
+			await vscode.commands.executeCommand('workbench.action.positionPanelBottom');
+			console.log('✓ Panel moved to bottom position');
+		} catch (error) {
+			console.log('Could not move panel to bottom:', error);
+			// Try to ensure panel is visible at least
+			try {
+				await vscode.commands.executeCommand('workbench.action.togglePanel');
+			} catch (fallbackError) {
+				console.log('Panel toggle fallback failed:', fallbackError);
+			}
+		}
+		
+		// Step 4: Show sidebar (Explorer, etc.)
+		try {
+			await vscode.commands.executeCommand('workbench.action.toggleSidebarVisibility');
+			console.log('✓ Sidebar restored');
+		} catch (error) {
+			console.log('Could not show sidebar:', error);
+		}
+		
+		// Step 5: Open chat in normal mode (sidebar/panel), not editor
+		try {
+			await vscode.commands.executeCommand('workbench.action.chat.open');
+			console.log('✓ Chat opened in normal mode');
+		} catch (error) {
+			console.log('Primary chat command failed, trying fallback:', error);
+			try {
+				// Fallback: try to open chat in sidebar
+				await vscode.commands.executeCommand('workbench.action.chat.openInSidebar');
+			} catch (fallbackError) {
+				console.log('Chat fallback failed:', fallbackError);
+			}
+		}
+		
+		// Step 6: Create a new empty editor in the center
+		try {
+			await vscode.commands.executeCommand('workbench.action.files.newUntitledFile');
+			console.log('✓ New empty editor created');
+		} catch (error) {
+			console.log('Could not create new file:', error);
+		}
+		
+		// Step 7: Ensure status bar is visible
+		try {
+			// Check if status bar is hidden and show it if needed
+			// Note: This toggles, so we may need to be careful about current state
+			await vscode.commands.executeCommand('workbench.action.toggleStatusbarVisibility');
+			console.log('✓ Status bar visibility checked');
+		} catch (error) {
+			console.log('Could not toggle status bar:', error);
+		}
+		
+		// Step 8: Focus the editor area
+		try {
+			await vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+			console.log('✓ Editor focused');
+		} catch (error) {
+			console.log('Could not focus editor:', error);
+		}
+		
+		// Final delay to let all changes settle
+		await new Promise(resolve => setTimeout(resolve, 200));
+		
+		console.log('Default VS Code layout restoration completed');
+		
+	} catch (error) {
+		console.log('Error during layout restoration:', error);
+		throw new Error('Unable to restore default layout');
 	}
 }
 

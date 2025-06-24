@@ -76,7 +76,7 @@ suite('Copilot Layout Manager Integration Tests', () => {
 		assert.ok(packageJson.contributes.commands, 'Package should have commands section');
 		
 		const commands = packageJson.contributes.commands;
-		assert.strictEqual(commands.length, 5, 'Should have 5 commands defined');
+		assert.strictEqual(commands.length, 6, 'Should have 6 commands defined');
 		
 		const commandIds = commands.map((cmd: any) => cmd.command);
 		assert.ok(commandIds.includes('agent-first-mode.setupLayout'), 'Should include setupLayout command');

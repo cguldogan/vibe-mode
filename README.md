@@ -9,6 +9,7 @@ This extension provides the following commands to optimize your VS Code layout f
 ### Primary Commands
 
 - **Setup Layout** (`agent-first-mode.setupLayout`) - Executes all layout optimizations with conflict resolution
+- **Exit Copilot Mode** (`agent-first-mode.exitMode`) - Restores default VS Code layout (exits Copilot mode)
 - **Open Copilot in Editor** (`agent-first-mode.openCopilotInEditor`) - Opens Copilot chat with enhanced conflict detection
 - **Move Terminal to Left** (`agent-first-mode.moveTerminalToLeft`) - Positions the terminal panel on the left side
 - **Hide Primary Sidebar** (`agent-first-mode.hidePrimarySidebar`) - Hides the activity bar and sidebar for more space
@@ -37,7 +38,12 @@ This extension now includes enhanced logic to resolve layout conflicts that can 
 ### Quick Setup
 Run the **"Copilot Layout Manager: Setup Layout"** command from the Command Palette to execute all layout optimizations with automatic conflict resolution.
 
+### Exit Copilot Mode  
+Run the **"Copilot Layout Manager: Exit Copilot Mode"** command to restore the default VS Code layout when you're done with focused Copilot work.
+
 ### Individual Commands
+- **"Copilot Layout Manager: Setup Layout"** - Complete Copilot layout optimization
+- **"Copilot Layout Manager: Exit Copilot Mode"** - Restore default VS Code layout
 - **"Copilot Layout Manager: Open Copilot in Editor"** - Opens Copilot chat in editor mode with conflict resolution
 - **"Copilot Layout Manager: Move Terminal to Left"** - Repositions terminal panel to the left side
 - **"Copilot Layout Manager: Hide Primary Sidebar"** - Hides activity bar and sidebar

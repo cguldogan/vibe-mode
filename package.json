@@ -37,6 +37,11 @@
         "command": "agent-first-mode.cleanLayout",
         "title": "Clean Layout for Copilot",
         "category": "Copilot Layout Manager"
+      },
+      {
+        "command": "agent-first-mode.exitMode",
+        "title": "Exit Copilot Mode (Restore Default Layout)",
+        "category": "Copilot Layout Manager"
       }
     ]
   },
