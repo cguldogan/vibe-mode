@@ -2,7 +2,32 @@
 
 All notable changes to the "Vibe Mode" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [1.0.0] - 2025-06-24
+
+### Added
+- Initial marketplace release of Vibe Mode extension
+- **Vibe On** command to enter optimal coding flow state
+- **Vibe Off** command to exit flow state and restore default layout
+- Smart layout optimization with conflict resolution
+- Automatic Copilot integration in editor mode
+- Terminal positioning optimization
+- Activity bar and sidebar management
+- Enhanced Welcome tab handling
+- Comprehensive error handling and fallback mechanisms
+
+### Features
+- **Flow State Optimization**: Clean slate approach with UI minimization
+- **Conflict Resolution**: Automatic detection and resolution of layout conflicts
+- **AI Integration**: Seamless Copilot chat integration in editor mode
+- **Workspace Management**: Intelligent terminal and panel positioning
+- **Error Recovery**: Graceful handling of command failures
+
+### Technical
+- 108+ comprehensive tests covering all functionality
+- TypeScript implementation with full type safety
+- ESLint configuration for code quality
+- Automated testing pipeline
+- VS Code API integration with fallback support
 
 ## [0.1.0] - 2025-06-24
 
