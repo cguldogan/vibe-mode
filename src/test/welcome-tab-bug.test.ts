@@ -36,7 +36,7 @@ suite('Welcome Tab Layout Conflict Bug Tests', () => {
 		
 		// Step 4: Try to open Copilot - this creates the conflict
 		try {
-			await vscode.commands.executeCommand('vscode.editorChat.start');
+			await vscode.commands.executeCommand('workbench.action.chat.openInEditor');
 			console.log('✓ Copilot chat opened - conflict should be visible now');
 		} catch (error) {
 			console.log('Copilot command failed (expected in test environment):', (error as Error).message);

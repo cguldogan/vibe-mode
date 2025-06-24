@@ -127,22 +127,49 @@ async function openCopilotInEditor(): Promise<void> {
 			await new Promise(resolve => setTimeout(resolve, 200));
 		}
 		
-		// Try the new editor chat command first
-		await vscode.commands.executeCommand('vscode.editorChat.start');
-		console.log('✓ Copilot opened in editor mode');
+		// Try working commands in order of preference
+		try {
+			// First try: Open chat in editor directly (most reliable approach)
+			await vscode.commands.executeCommand('workbench.action.chat.openInEditor');
+			console.log('✓ Copilot opened in editor mode using workbench.action.chat.openInEditor');
+			return;
+		} catch (error) {
+			console.log('Primary command failed, trying fallback:', error);
+		}
+		
+		try {
+			// Second try: Open chat generally, then move to editor
+			await vscode.commands.executeCommand('workbench.action.chat.open');
+			await new Promise(resolve => setTimeout(resolve, 100));
+			await vscode.commands.executeCommand('workbench.action.chat.openInEditor');
+			console.log('✓ Copilot opened using chat.open -> openInEditor sequence');
+			return;
+		} catch (error) {
+			console.log('Second fallback failed, trying third:', error);
+		}
+		
+		try {
+			// Third try: Focus Copilot panel then move to editor
+			await vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
+			await new Promise(resolve => setTimeout(resolve, 100));
+			await vscode.commands.executeCommand('workbench.action.chat.openInEditor');
+			console.log('✓ Copilot opened using panel focus -> openInEditor sequence');
+			return;
+		} catch (error) {
+			console.log('Third fallback failed, trying final approach:', error);
+		}
+		
+		try {
+			// Final try: Quick chat toggle
+			await vscode.commands.executeCommand('workbench.action.quickchat.toggle');
+			console.log('✓ Copilot opened using quickchat toggle');
+			return;
+		} catch (error) {
+			throw new Error('Unable to open Copilot in any mode. Please ensure Copilot extension is installed and enabled.');
+		}
 		
 	} catch (error) {
-		// Fallback to alternative commands if the primary one fails
-		try {
-			await vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
-		} catch (fallbackError) {
-			// Try opening chat in editor as another fallback
-			try {
-				await vscode.commands.executeCommand('workbench.action.chat.openInEditor');
-			} catch (finalError) {
-				throw new Error('Unable to open Copilot in editor mode. Please ensure Copilot extension is installed and enabled.');
-			}
-		}
+		throw new Error(`Failed to open Copilot in editor mode: ${error}`);
 	}
 }
 
