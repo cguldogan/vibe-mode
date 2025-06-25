@@ -2,6 +2,12 @@
 
 A VS Code extension that helps you enter your optimal coding flow state by intelligently managing your workspace layout for maximum focus and productivity.
 
+### UI Transformation Preview
+
+![Vibe Mode UI Changes](images/1.png)
+
+*Visual demonstration of how Vibe Mode transforms your VS Code workspace for optimal focus and flow state.*
+
 ## Features
 
 This extension provides commands to optimize your VS Code layout for deep focus work:
